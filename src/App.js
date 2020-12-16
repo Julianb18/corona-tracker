@@ -8,11 +8,11 @@ import {
 } from "@material-ui/core";
 import "leaflet/dist/leaflet.css";
 
+import "./App.css";
 import { InfoBox } from "./components/InfoBox";
 import { Map } from "./components/map/Map";
 import { Table } from "./components/table/Table";
 import { sortData } from "./utils/util";
-import "./App.css";
 import { LineGraph } from "./components/LineGraph";
 
 function App() {
@@ -20,8 +20,9 @@ function App() {
   const [country, setCountry] = useState("Worldwide");
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
-  const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
+  const [mapCenter, setMapCenter] = useState([34.80746, -40.4796]);
   const [mapZoom, setMapZoom] = useState(3);
+  const [mapCountries, setMapCountries] = useState([]);
 
   // useEffect to fetch worldwide data on first load
   useEffect(() => {
@@ -42,11 +43,13 @@ function App() {
           const countries = data.map((country) => ({
             name: country.country,
             value: country.countryInfo.iso2,
+            id: country.countryInfo._id,
           }));
 
           const sortedData = sortData(data);
-
+          console.log(countries);
           setTableData(sortedData);
+          setMapCountries(data);
           setCountries(countries);
         });
     };
@@ -55,7 +58,7 @@ function App() {
 
   const onCountryChange = async (event) => {
     const countryCode = event.target.value;
-    console.log(countryCode);
+
     setCountry(countryCode);
 
     const url =
@@ -69,13 +72,21 @@ function App() {
         setCountry(countryCode);
         // storing all the data from country response
         setCountryInfo(data);
+        console.log(
+          "OVER HERE >>>",
+          data.countryInfo.lat,
+          data.countryInfo.long
+        );
 
         setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+        // console.log(mapCenter);
         setMapZoom(4);
       });
   };
 
-  console.log("COUNTRY INFO >>>", countryInfo);
+  console.log("COORDS HERE >>>", mapCenter);
+
+  // console.log("COUNTRY INFO >>>", countryInfo);
 
   return (
     <div className="app">
@@ -90,7 +101,9 @@ function App() {
             >
               <MenuItem value="Worldwide">Worldwide</MenuItem>
               {countries.map((country) => (
-                <MenuItem value={country.value}>{country.name}</MenuItem>
+                <MenuItem key={country.id} value={country.value}>
+                  {country.name}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -113,7 +126,7 @@ function App() {
           />
         </div>
 
-        <Map center={mapCenter} zoom={mapZoom} />
+        <Map countries={mapCountries} center={mapCenter} zoom={mapZoom} />
       </div>
       <Card className="app__right">
         <CardContent>

@@ -6,7 +6,7 @@ export const Table = ({ countries }) => {
     <div className="table">
       {/* destructuring country and cases from country object */}
       {countries.map(({ country, cases }) => (
-        <tr>
+        <tr key={country}>
           <td>{country}</td>
           <td>
             <strong>{cases}</strong>
