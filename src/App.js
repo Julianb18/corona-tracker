@@ -9,13 +9,14 @@ import {
 
 import { InfoBox } from "./components/InfoBox";
 import { Map } from "./components/Map";
-import { Table } from "./components/Table";
+import { Table } from "./components/table/Table";
 import "./App.css";
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("Worldwide");
   const [countryInfo, setCountryInfo] = useState({});
+  const [tableData, setTableData] = useState([]);
 
   // useEffect to fetch worldwide data on first load
   useEffect(() => {
@@ -37,7 +38,7 @@ function App() {
             name: country.country,
             value: country.countryInfo.iso2,
           }));
-
+          setTableData(data);
           setCountries(countries);
         });
     };
