@@ -12,7 +12,7 @@ import "./App.css";
 import { InfoBox } from "./components/infoBox/InfoBox";
 import { Map } from "./components/map/Map";
 import { Table } from "./components/table/Table";
-import { LineGraph } from "./components/LineGraph";
+import { LineGraph } from "./linegraph/LineGraph";
 import { sortData } from "./utils/util";
 import { prettyPrintStat } from "./utils/util";
 
@@ -45,11 +45,10 @@ function App() {
           const countries = data.map((country) => ({
             name: country.country,
             value: country.countryInfo.iso2,
-            id: country.countryInfo._id,
           }));
 
           const sortedData = sortData(data);
-          // console.log(countries);
+
           setTableData(sortedData);
           setMapCountries(data);
           setCountries(countries);
@@ -74,21 +73,26 @@ function App() {
         setCountry(countryCode);
         // storing all the data from country response
         setCountryInfo(data);
-        console.log(
-          "OVER HERE >>>",
-          data.countryInfo.lat,
-          data.countryInfo.long
-        );
+        // console.log(
+        //   "OVER HERE >>>",
+        //   data.countryInfo.lat,
+        //   data.countryInfo.long
+        // );
 
-        setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
-        // console.log(mapCenter);
-        setMapZoom(4);
+        if (countryCode === "Worldwide") {
+          setMapCenter([34, -10]);
+          setMapZoom(4);
+        } else {
+          setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+          setMapZoom(4);
+        }
       });
   };
+  console.log(mapCenter);
 
-  console.log("COORDS HERE >>>", mapCenter);
+  // console.log("COORDS HERE >>>", mapCenter);
 
-  // console.log("COUNTRY INFO >>>", countryInfo);
+  // console.log("COUNTRY INFO >>>", countries);
 
   return (
     <div className="app">
@@ -103,7 +107,7 @@ function App() {
             >
               <MenuItem value="Worldwide">Worldwide</MenuItem>
               {countries.map((country) => (
-                <MenuItem key={country.id} value={country.value}>
+                <MenuItem key={country.name} value={country.value}>
                   {country.name}
                 </MenuItem>
               ))}
@@ -112,6 +116,7 @@ function App() {
         </div>
         <div className="app__stats">
           <InfoBox
+            isRed
             active={casesType === "cases"}
             onClick={(e) => setCasesType("cases")}
             title="Coronavirus Cases"
@@ -126,6 +131,7 @@ function App() {
             total={prettyPrintStat(countryInfo.recovered)}
           />
           <InfoBox
+            isRed
             active={casesType === "deaths"}
             onClick={(e) => setCasesType("deaths")}
             title="Deaths"
@@ -145,7 +151,7 @@ function App() {
         <CardContent>
           <h3>Live Cases by country</h3>
           <Table countries={tableData} />
-          <h3>Worldwide new {casesType}</h3>
+
           <LineGraph casesType={casesType} />
         </CardContent>
       </Card>
