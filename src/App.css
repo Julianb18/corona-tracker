@@ -6,6 +6,23 @@ body {
   background-color: rgb(235, 235, 235);
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #aaa;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 10px;
+}
+
 .app {
   display: flex;
   justify-content: space-evenly;
@@ -17,6 +34,10 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+}
+
+.app__dropdown {
+  background-color: white;
 }
 
 .app__left {
