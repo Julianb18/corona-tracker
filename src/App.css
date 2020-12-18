@@ -38,6 +38,7 @@ body {
 
 .app__header h1 {
   color: rgb(245, 245, 245);
+  text-transform: uppercase;
 }
 
 .app__dropdown {
