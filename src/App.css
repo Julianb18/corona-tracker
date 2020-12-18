@@ -43,9 +43,17 @@ body {
 
 .app__dropdown {
   background-color: rgb(24, 25, 26);
+  border-radius: 15px !important;
 }
 
 /* This is classes from material ui */
+
+.MuiInputBase-root,
+.MuiOutlinedInput-root,
+.MuiInputBase-formControl {
+  border-radius: 15px !important;
+}
+
 .MuiSelect-root {
   color: rgb(245, 245, 245) !important;
 }
@@ -68,6 +76,7 @@ body {
 .app__right {
   max-width: 360px;
   background-color: rgb(24, 25, 26) !important;
+  border-radius: 15px !important;
 }
 
 .app__right h3 {

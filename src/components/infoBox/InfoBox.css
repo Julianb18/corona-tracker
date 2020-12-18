@@ -2,6 +2,7 @@
   flex: 1;
   cursor: pointer;
   background-color: rgb(24, 25, 26) !important;
+  border-radius: 15px !important;
 }
 
 .infoBox:not(:last-child) {
@@ -13,7 +14,7 @@
 }
 
 .infoBox--selected {
-  border-top: 10px solid rgb(141, 255, 47);
+  border-top: 6px solid rgb(141, 255, 47);
 }
 
 .infoBox--red {
