@@ -81,14 +81,14 @@ function App() {
 
         if (countryCode === "Worldwide") {
           setMapCenter([34, -10]);
-          setMapZoom(4);
+          setMapZoom(3);
         } else {
           setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
           setMapZoom(4);
         }
       });
   };
-  console.log(mapCenter);
+  // console.log(mapCenter);
 
   // console.log("COORDS HERE >>>", mapCenter);
 
@@ -131,7 +131,7 @@ function App() {
             total={prettyPrintStat(countryInfo.recovered)}
           />
           <InfoBox
-            isRed
+            isBlack
             active={casesType === "deaths"}
             onClick={(e) => setCasesType("deaths")}
             title="Deaths"

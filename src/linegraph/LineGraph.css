@@ -1,6 +1,8 @@
 .line-graph {
   margin: 30px 0 10px 0;
   max-height: 230px;
+  background-color: rgb(24, 25, 26);
+  color: rgb(245, 245, 245);
 }
 
 .line-graph h3 {
