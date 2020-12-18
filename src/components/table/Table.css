@@ -23,6 +23,10 @@
   border-radius: 10px;
 }
 
+table {
+  width: 100%;
+}
+
 .table tr {
   display: flex;
   justify-content: space-between;

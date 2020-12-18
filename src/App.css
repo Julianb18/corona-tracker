@@ -26,7 +26,7 @@ body {
 .app {
   display: flex;
   justify-content: space-evenly;
-  padding: 20px 0;
+  padding: 20px 10px;
 }
 
 .app__header {
@@ -38,6 +38,10 @@ body {
 
 .app__dropdown {
   background-color: white;
+}
+
+.app__right {
+  max-width: 360px;
 }
 
 .app__left {
@@ -52,5 +56,11 @@ body {
 @media (max-width: 990px) {
   .app {
     flex-direction: column;
+  }
+
+  .app__right {
+    max-width: none;
+    margin-top: 20px;
+    border-radius: 20px !important;
   }
 }
